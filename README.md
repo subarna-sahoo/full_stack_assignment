@@ -5,6 +5,7 @@ zeza.tech
 
 #### Install all dependency by
 ##### `pip3 install -r requirements.txt`
+##### `cat requirements.txt | xargs -n 1 pip install`
 
 #### To run the server
 ##### `python3 manage.py runserver`
