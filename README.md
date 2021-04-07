@@ -22,8 +22,9 @@ zeza.tech
 
 
 ## GET /event
-**Code** : `200 OK`
 This will return all the events.
+
+**Code** : `200 OK`
 ```json
 [
     {
@@ -48,8 +49,9 @@ This will return all the events.
 ```
 
 ## GET /event/1234
-**Code** : `200 OK`
 For a Event with ID 1234. The event information will come like this.
+
+**Code** : `200 OK`
 ```json
 {
     "user_id": "1234",
@@ -62,10 +64,44 @@ For a Event with ID 1234. The event information will come like this.
 }
 ```
 * If the Event ID not valid.
+
 **Code** : `500 ERROR`
 ```json
 {
     "msg": "Invalid even_id"
 }
 ```
+
+
+
+## POST /event
+Body
+```json
+{
+    "user_id": "1234",
+    "page_tags": "\" Big",
+    "page_description": "KIDS BAILEY BOW II \" Big Kids\"",
+    "event_time": "2021-04-06T19:35:41.124Z",
+    "user_joined": "2000-12-03T15:35:38.104Z",
+    "event_id": "1f71739dbc984cd4995b2",
+    "page_title": "BAILEY BOW"
+}
+```
+
+**Code** : `200 OK`
+```
+{
+    "msg": "Successfully Saved"
+}
+```
+
+**Code** : `500 ERROR`
+
+```
+{
+    "msg": "Invalid Head"
+}
+```
+
+
 
