@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Event Monitor
+{% endblock %}
+
+
+{% block content %}
+<h2>Event Monitor</h2>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>EventID</th>
+            <th>EventTime</th>
+            <th>UserID</th>
+            <th>UserJoined</th>
+
+            <th>PageTitle</th>
+            <th>PageTags</th>
+            <th>PageDescription</th>
+        </tr>
+    </thead>
+    <tbody id="tbody_event">
+        {% for event in data %}
+        <tr>
+            <td>{{event.event_id}}</td>
+            <td>{{event.event_time}}</td>
+            <td>{{event.user_id}}</td>
+            <td>{{event.user_joined}}</td>
+            <td>{{event.page_title}}</td>
+            <td>{{event.page_tags}}</td>
+            <td>{{event.page_description}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+<script>
+
+    function updateTable() {
+        $.ajax({
+            url: "{% url 'ajax_live_event_data' %}",
+            type: "post",
+            data: {},
+            headers: { "X-CSRFToken": "{{ csrf_token }}" },
+            success: function (data) {
+                console.log(data)
+                $("#tbody_event").empty()
+                for (event_ind in data){
+                    $("#tbody_event").append(`\
+                    <tr>
+                    <td>${data[event_ind]['event_id']}</td>
+                    <td>${data[event_ind]['event_time']}</td>
+                    <td>${data[event_ind]['user_id']}</td>
+                    <td>${data[event_ind]['user_joined']}</td>
+                    <td>${data[event_ind]['page_title']}</td>
+                    <td>${data[event_ind]['page_tags']}</td>
+                    <td>${data[event_ind]['page_description']}</td>
+                    <td><a class="btn btn-secondary" target="_top" href="/event_update/${data[event_ind]['event_id']}">Update Event</a></td>
+                    </tr>
+                    `)
+                    // console.table(data)
+                }
+            },
+            error: function (data) {
+                alert("Error: ", data)
+            },
+        });
+    }
+
+    $(document).ready(function () {
+        console.log("ready!");
+        setInterval(updateTable, 10000);
+    });
+</script>
+{% endblock %}
