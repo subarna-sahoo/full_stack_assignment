@@ -1,7 +1,7 @@
-#### full_stack_Assignment
+### full_stack_Assignment
 zeza.tech
 
-### Available Scripts
+## Available Scripts
 
 #### Install all dependency by
 ##### `pip3 install -r requirements.txt`
@@ -17,7 +17,7 @@ zeza.tech
 
 
 ---------------------------------------------------------------------------------------------------------------------
-## APIs
+# APIs
 
 
 
