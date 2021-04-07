@@ -75,7 +75,7 @@ For a Event with ID 1234. The event information will come like this.
 
 
 ## POST /event
-Payload
+This will SAVE the Event as provided data from Payload
 ```json
 {
     "event_id": "1234",
@@ -105,7 +105,7 @@ Payload
 
 ## PUT /event/1234
 ## PUT /event
-Payload
+This will UPDATE an event, You can pass the `event_id` with the payload/ in the URL.
 ```json
 {
     "event_id": "1234",
@@ -135,7 +135,8 @@ Payload
 
 ## DELETE /event/1234
 ## DELETE /event
-Payload
+This will DELETE an event, You can pass the `event_id` with the payload/ in the URL.
+
 ```json
 {
     "event_id": "1234",
