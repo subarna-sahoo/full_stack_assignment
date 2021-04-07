@@ -1,12 +1,12 @@
-### full_stack_Assignment
-##### zeza.tech
+#### full_stack_Assignment
+zeza.tech
 
-# Available Scripts
+### Available Scripts
 
 #### Install all dependency by
 ##### `pip3 install -r requirements.txt`
 
-#### *To run the server*
+#### To run the server
 ##### `python3 manage.py runserver`
 
 **Hint:**
@@ -14,38 +14,58 @@
 
 
 
+
+
+---------------------------------------------------------------------------------------------------------------------
 ## APIs
 
 
-## Success Response
 
+## GET /event
 **Code** : `200 OK`
+This will return all the events.
+```json
+[
+    {
+        "user_id": "1234",
+        "page_tags": "\" Big",
+        "page_description": "KIDS BAILEY BOW II \" Big Kids\"",
+        "event_time": "2021-04-06T19:35:41.124Z",
+        "user_joined": "2000-12-03T15:35:38.104Z",
+        "event_id": "1f71739dbc984cd4995b2",
+        "page_title": "BAILEY BOW"
+    },
+    {
+        "event_time": "2021-04-06T19:35:38.321Z",
+        "user_joined": "2014-11-01T06:58:10.752Z",
+        "page_tags": "Winter",
+        "user_id": "43d437fe-970f-11eb-9d46-b370afd8d305",
+        "event_id": "86c308cb243a449ea7d28",
+        "page_title": "Australia Mini",
+        "page_description": "Ugg Australia Mini Bailey Button Women US 6 Gray Winter Boot"
+    }
+ ]
+```
 
-**Content examples**
-
-For a User with ID 1234 on the local database where that User has saved. The event information will come like this.
-
+## GET /event/1234
+**Code** : `200 OK`
+For a Event with ID 1234. The event information will come like this.
 ```json
 {
-    "id": 1234,
-    "first_name": "Joe",
-    "last_name": "Bloggs",
-    "email": "joe25@example.com"
+    "user_id": "1234",
+    "page_tags": "\" Big",
+    "page_description": "KIDS BAILEY BOW II \" Big Kids\"",
+    "event_time": "2021-04-06T19:35:41.124Z",
+    "user_joined": "2000-12-03T15:35:38.104Z",
+    "event_id": "1f71739dbc984cd4995b2",
+    "page_title": "BAILEY BOW"
+}
+```
+* If the Event ID not valid.
+**Code** : `500 ERROR`
+```json
+{
+    "msg": "Invalid even_id"
 }
 ```
 
-For a user with ID 4321 on the local database but no details have been set yet.
-
-```json
-{
-    "id": 4321,
-    "first_name": "",
-    "last_name": "",
-    "email": ""
-}
-```
-
-## Notes
-
-* If the User does not have a `UserInfo` instance when requested then one will
-  be created for them.
