@@ -28,20 +28,20 @@ This will return all the events.
 ```json
 [
     {
-        "user_id": "1234",
+        "event_id": "1234",
+        "user_id": "1f71739dbc984cd4995b2",
         "page_tags": "\" Big",
         "page_description": "KIDS BAILEY BOW II \" Big Kids\"",
         "event_time": "2021-04-06T19:35:41.124Z",
         "user_joined": "2000-12-03T15:35:38.104Z",
-        "event_id": "1f71739dbc984cd4995b2",
         "page_title": "BAILEY BOW"
     },
     {
+        "event_id": "86c308cb243a449ea7d28",
+        "user_id": "43d437fe-970f-11eb-9d46-b370afd8d305",
         "event_time": "2021-04-06T19:35:38.321Z",
         "user_joined": "2014-11-01T06:58:10.752Z",
         "page_tags": "Winter",
-        "user_id": "43d437fe-970f-11eb-9d46-b370afd8d305",
-        "event_id": "86c308cb243a449ea7d28",
         "page_title": "Australia Mini",
         "page_description": "Ugg Australia Mini Bailey Button Women US 6 Gray Winter Boot"
     }
@@ -54,12 +54,12 @@ For a Event with ID 1234. The event information will come like this.
 **Code** : `200 OK`
 ```json
 {
-    "user_id": "1234",
+    "event_id": "1234",
+    "user_id": "1f71739dbc984cd4995b2",
     "page_tags": "\" Big",
     "page_description": "KIDS BAILEY BOW II \" Big Kids\"",
     "event_time": "2021-04-06T19:35:41.124Z",
     "user_joined": "2000-12-03T15:35:38.104Z",
-    "event_id": "1f71739dbc984cd4995b2",
     "page_title": "BAILEY BOW"
 }
 ```
@@ -75,15 +75,15 @@ For a Event with ID 1234. The event information will come like this.
 
 
 ## POST /event
-Body
+Payload
 ```json
 {
-    "user_id": "1234",
-    "page_tags": "\" Big",
-    "page_description": "KIDS BAILEY BOW II \" Big Kids\"",
+    "event_id": "1234",
+    "user_id": "1f71739dbc984cd4995b2",
+    "page_tags": "Big Kids",
+    "page_description": "KIDS BAILEY BOW II Big Kids\"",
     "event_time": "2021-04-06T19:35:41.124Z",
     "user_joined": "2000-12-03T15:35:38.104Z",
-    "event_id": "1f71739dbc984cd4995b2",
     "page_title": "BAILEY BOW"
 }
 ```
@@ -99,9 +99,62 @@ Body
 
 ```
 {
-    "msg": "Invalid Head"
+    "msg": "Invalid Body"
 }
 ```
 
+## PUT /event/1234
+## PUT /event
+Payload
+```json
+{
+    "event_id": "1234",
+    "user_id": "1f71739dbc984cd4995b2",
+    "page_tags": "Big Kids Test",
+    "page_description": "KIDS BAILEY BOW II Big Kids\"",
+    "event_time": "2021-04-06T19:35:41.124Z",
+    "user_joined": "2000-12-03T15:35:38.104Z",
+    "page_title": "BAILEY BOW"
+}
+```
+
+**Code** : `200 OK`
+```
+{
+    "msg": "Successfully Updated Event: {1234}""
+}
+```
+
+**Code** : `500 ERROR`
+
+```
+{
+    "msg": "Invalid EventID"
+}
+```
+
+## DELETE /event/1234
+## DELETE /event
+Payload
+```json
+{
+    "event_id": "1234",
+}
+```
+
+**Code** : `200 OK`
+```
+{
+    "msg": "Successfully Deleted Event: {1234}""
+}
+```
+
+**Code** : `500 ERROR`
+
+```
+{
+    "msg": "Invalid EventID"
+}
+```
 
 
