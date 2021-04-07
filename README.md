@@ -20,6 +20,7 @@ zeza.tech
 ---------------------------------------------------------------------------------------------------------------------
 # APIs
 
+### Endpoint: `http://54.209.213.187:8000/event`
 
 
 ## GET /event
@@ -122,7 +123,7 @@ This will UPDATE an event, You can pass the `event_id` with the payload/ in the 
 **Code** : `200 OK`
 ```
 {
-    "msg": "Successfully Updated Event: {1234}""
+    "msg": "Successfully Updated Event: 1234""
 }
 ```
 
@@ -147,7 +148,7 @@ This will DELETE an event, You can pass the `event_id` with the payload/ in the 
 **Code** : `200 OK`
 ```
 {
-    "msg": "Successfully Deleted Event: {1234}""
+    "msg": "Successfully Deleted Event: 1234""
 }
 ```
 
