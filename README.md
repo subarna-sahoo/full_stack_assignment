@@ -1,29 +1,47 @@
-### full_stack_Assignment
-zeza.tech
+# Full Stack Assignment: Live Event Feed & Monitor
 
-## Available Scripts
+Two Django apps that share a **Firebase Firestore** collection of user page-view events. Built as a full-stack assignment for zeza.tech.
 
-#### Install all dependency by
-##### `pip3 install -r requirements.txt`
-##### `cat requirements.txt | xargs -n 1 pip install`
+| App | Folder | What it does |
+|---|---|---|
+| **Core Feeder** | `core_feeder/` | Generates realistic random page-view events (product titles scraped from a store page, random users and timestamps) and writes them to Firestore |
+| **Project Monitor** | `project_monitor/` | Dashboard that polls Firestore over AJAX to show events as they arrive, plus a REST API for creating, reading, updating and deleting events |
 
-#### To run the server
-##### `python3 manage.py runserver`
+## Setup
 
-**Hint:**
-*You can host both websites with different ports*
+```bash
+python3 -m venv venv && source venv/bin/activate
+pip install django firebase-admin requests beautifulsoup4
+```
 
+> `requirements.txt` is a full system `pip freeze` (it includes Ubuntu packages such as `apturl` and `Brlapi`), so installing the packages above directly is simpler.
 
+Add your Firebase service-account credentials to `firebaseConfig` in both `*/common_utils.py` files.
 
+## Running
 
+Run the two apps on different ports:
 
----------------------------------------------------------------------------------------------------------------------
-# APIs
+```bash
+cd core_feeder && python3 manage.py runserver 8001        # event generator
+cd project_monitor && python3 manage.py runserver 8000    # live monitor + API
+```
 
-### Endpoint: `http://54.209.213.187:8000/event`
+| App | Path | Description |
+|---|---|---|
+| Core Feeder | `/` | Home page |
+| Core Feeder | `/generate_random_event` | Create a random event in Firestore |
+| Project Monitor | `/` | Live event dashboard |
+| Project Monitor | `/ajax_live_event_data` | JSON feed polled by the dashboard |
+| Project Monitor | `/event`, `/event/<event_id>` | REST API (below) |
 
+---
 
-## GET /event
+## Events API (Project Monitor)
+
+Base URL: `http://localhost:8000`
+
+### GET /event
 This will return all the events.
 
 **Code** : `200 OK`
@@ -50,7 +68,7 @@ This will return all the events.
  ]
 ```
 
-## GET /event/1234
+### GET /event/1234
 For a Event with ID 1234. The event information will come like this.
 
 **Code** : `200 OK`
@@ -76,7 +94,7 @@ For a Event with ID 1234. The event information will come like this.
 
 
 
-## POST /event
+### POST /event
 This will SAVE the Event as provided data from Payload
 ```json
 {
@@ -105,8 +123,7 @@ This will SAVE the Event as provided data from Payload
 }
 ```
 
-## PUT /event/1234
-## PUT /event
+### PUT /event/1234 · PUT /event
 This will UPDATE an event, You can pass the `event_id` with the payload/ in the URL.
 ```json
 {
@@ -123,7 +140,7 @@ This will UPDATE an event, You can pass the `event_id` with the payload/ in the 
 **Code** : `200 OK`
 ```
 {
-    "msg": "Successfully Updated Event: 1234""
+    "msg": "Successfully Updated Event: 1234"
 }
 ```
 
@@ -135,20 +152,19 @@ This will UPDATE an event, You can pass the `event_id` with the payload/ in the 
 }
 ```
 
-## DELETE /event/1234
-## DELETE /event
+### DELETE /event/1234 · DELETE /event
 This will DELETE an event, You can pass the `event_id` with the payload/ in the URL.
 
 ```json
 {
-    "event_id": "1234",
+    "event_id": "1234"
 }
 ```
 
 **Code** : `200 OK`
 ```
 {
-    "msg": "Successfully Deleted Event: 1234""
+    "msg": "Successfully Deleted Event: 1234"
 }
 ```
 
@@ -159,5 +175,3 @@ This will DELETE an event, You can pass the `event_id` with the payload/ in the 
     "msg": "Invalid EventID"
 }
 ```
-
-
