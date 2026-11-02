@@ -92,8 +92,6 @@ For a Event with ID 1234. The event information will come like this.
 }
 ```
 
-
-
 ### POST /event
 This will SAVE the Event as provided data from Payload
 ```json
@@ -175,3 +173,14 @@ This will DELETE an event, You can pass the `event_id` with the payload/ in the 
     "msg": "Invalid EventID"
 }
 ```
+
+## Configuration
+
+Secrets are read from **environment variables**, so nothing sensitive lives in the code. Copy [`.env.example`](.env.example) to `.env` (it is git-ignored) or export the variables in your shell:
+
+| Variable | Purpose |
+|---|---|
+| `DJANGO_SECRET_KEY` | Django `SECRET_KEY`. If unset, a random key is generated at startup (fine for local dev). |
+| `DJANGO_SECRET_KEY_2` | Django `SECRET_KEY`. If unset, a random key is generated at startup (fine for local dev). for `project_monitor` |
+
+The same values are stored as **GitHub Actions secrets** on this repo (*Settings → Secrets and variables → Actions*), so CI/CD workflows can use them as `${{ secrets.NAME }}`.
